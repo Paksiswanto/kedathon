@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kedhaton Property</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap"
+    rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --cream: #FAF8F4;
+      --warm-white: #FFFDF9;
+      --charcoal: #1C1C1A;
+      --warm-gray: #6B6860;
+      --light-gray: #E8E5DF;
+      --gold: #B8924A;
+      --gold-light: #F5ECD9;
+      --border: #E0DDD6;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--charcoal);
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(250, 248, 244, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--charcoal);
+      letter-spacing: 0.02em;
+    }
+
+    .nav-logo span {
+      color: var(--gold);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--warm-gray);
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: 0.03em;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--gold);
+    }
+
+    /* HERO */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 100px 2rem 60px;
+      background: var(--warm-white);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-decor {
+      position: absolute;
+      right: -80px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 520px;
+      height: 520px;
+      border: 1px solid var(--light-gray);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .hero-decor-2 {
+      position: absolute;
+      right: 40px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 380px;
+      height: 380px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      max-width: 700px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      background: var(--gold-light);
+      color: var(--gold);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 2px;
+      margin-bottom: 1.5rem;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(36px, 5vw, 58px);
+      font-weight: 500;
+      line-height: 1.18;
+      color: var(--charcoal);
+      margin-bottom: 1.25rem;
+    }
+
+    h1 em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .hero-desc {
+      font-size: 17px;
+      color: var(--warm-gray);
+      font-weight: 300;
+      max-width: 520px;
+      margin-bottom: 2.5rem;
+      line-height: 1.8;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--charcoal);
+      color: #fff;
+      padding: 14px 28px;
+      border-radius: 3px;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      transition: background 0.2s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover {
+      background: var(--gold);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--charcoal);
+      border: 1px solid var(--border);
+      padding: 14px 28px;
+      border-radius: 3px;
+      font-size: 14px;
+      font-weight: 400;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+      cursor: pointer;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .stats-row {
+      display: flex;
+      gap: 3rem;
+      margin-top: 3.5rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 30px;
+      font-weight: 500;
+      color: var(--charcoal);
+    }
+
+    .stat-label {
+      font-size: 13px;
+      color: var(--warm-gray);
+      margin-top: 2px;
+    }
+
+    /* SECTION BASE */
+    section {
+      padding: 80px 2rem;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 500;
+      margin-bottom: 0.75rem;
+    }
+
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(26px, 3.5vw, 38px);
+      font-weight: 500;
+      line-height: 1.25;
+      color: var(--charcoal);
+      margin-bottom: 1.25rem;
+    }
+
+    .section-divider {
+      width: 100%;
+      height: 1px;
+      background: var(--border);
+      margin: 0;
+    }
+
+    /* ABOUT */
+    #tentang {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+      padding: 80px 2rem;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .about-img-box {
+      position: relative;
+    }
+
+    .about-img {
+      width: 100%;
+      aspect-ratio: 4/5;
+      background: var(--light-gray);
+      border-radius: 4px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .about-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .about-img-placeholder {
+      font-family: 'Playfair Display', serif;
+      font-size: 80px;
+      color: var(--border);
+    }
+
+    .about-accent {
+      position: absolute;
+      bottom: -20px;
+      right: -20px;
+      width: 140px;
+      height: 140px;
+      background: var(--gold-light);
+      border-radius: 3px;
+      z-index: -1;
+    }
+
+    .about-text h2 {
+      margin-bottom: 1rem;
+    }
+
+    .about-text p {
+      color: var(--warm-gray);
+      margin-bottom: 1rem;
+      font-size: 15px;
+      line-height: 1.85;
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 1.5rem;
+    }
+
+    .tag {
+      background: var(--gold-light);
+      color: var(--gold);
+      font-size: 12px;
+      padding: 5px 12px;
+      border-radius: 2px;
+      font-weight: 500;
+    }
+
+    /* BLOG */
+    #blog {
+      padding: 80px 2rem;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .blog-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 2.5rem;
+    }
+
+    .blog-form {
+      background: var(--warm-white);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .blog-form h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      margin-bottom: 1rem;
+      color: var(--charcoal);
+    }
+
+    .form-row {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .form-row input,
+    .form-row select,
+    textarea {
+      flex: 1;
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      color: var(--charcoal);
+      background: var(--warm-white);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .form-row input:focus,
+    .form-row select:focus,
+    textarea:focus {
+      border-color: var(--gold);
+    }
+
+    textarea {
+      width: 100%;
+      resize: vertical;
+      min-height: 80px;
+      margin-bottom: 12px;
+    }
+
+    .btn-post {
+      background: var(--gold);
+      color: #fff;
+      border: none;
+      padding: 10px 22px;
+      border-radius: 3px;
+      font-size: 14px;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
+
+    .btn-post:hover {
+      background: #9e7a38;
+    }
+
+    .posts-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .post-card {
+      background: var(--warm-white);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.5rem;
+      transition: border-color 0.2s;
+    }
+
+    .post-card:hover {
+      border-color: var(--gold);
+    }
+
+    .post-meta {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 0.75rem;
+    }
+
+    .post-cat {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      background: var(--gold-light);
+      color: var(--gold);
+      padding: 3px 9px;
+      border-radius: 2px;
+      font-weight: 500;
+    }
+
+    .post-date {
+      font-size: 12px;
+      color: var(--warm-gray);
+    }
+
+    .post-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--charcoal);
+      margin-bottom: 0.5rem;
+      line-height: 1.35;
+    }
+
+    .post-excerpt {
+      font-size: 14px;
+      color: var(--warm-gray);
+      line-height: 1.7;
+    }
+
+    .post-delete {
+      float: right;
+      background: none;
+      border: none;
+      color: #ccc;
+      font-size: 18px;
+      cursor: pointer;
+      transition: color 0.2s;
+      line-height: 1;
+    }
+
+    .post-delete:hover {
+      color: #e04444;
+    }
+
+    /* BERITA */
+    #berita {
+      padding: 80px 2rem;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .news-filter {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      padding: 7px 16px;
+      border-radius: 2px;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--warm-gray);
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .filter-btn.active,
+    .filter-btn:hover {
+      background: var(--charcoal);
+      color: #fff;
+      border-color: var(--charcoal);
+    }
+
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .news-card {
+      background: var(--warm-white);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.25rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .news-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-2px);
+    }
+
+    .news-source {
+      font-size: 11px;
+      color: var(--warm-gray);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .news-dot {
+      width: 5px;
+      height: 5px;
+      background: var(--gold);
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .news-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 1.35;
+      color: var(--charcoal);
+      margin-bottom: 0.5rem;
+    }
+
+    .news-desc {
+      font-size: 13px;
+      color: var(--warm-gray);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .news-time {
+      font-size: 12px;
+      color: #bbb;
+    }
+
+    .news-loading {
+      text-align: center;
+      color: var(--warm-gray);
+      padding: 3rem;
+      font-size: 14px;
+    }
+
+    /* KONTAK */
+    #kontak {
+      padding: 80px 2rem;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .kontak-inner {
+      background: var(--charcoal);
+      border-radius: 8px;
+      padding: 3rem;
+      display: flex;
+      gap: 3rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .kontak-text {
+      flex: 1;
+      min-width: 260px;
+    }
+
+    .kontak-text h2 {
+      color: #fff;
+      margin-bottom: 0.75rem;
+    }
+
+    .kontak-text p {
+      color: rgba(255, 255, 255, 0.55);
+      font-size: 15px;
+    }
+
+    .kontak-links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .kontak-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.2s;
+    }
+
+    .kontak-link:hover {
+      color: var(--gold);
+    }
+
+    .kontak-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 3px;
+      background: rgba(255, 255, 255, 0.07);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      border-top: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--warm-gray);
+    }
+
+    footer span {
+      color: var(--gold);
+      font-family: 'Playfair Display', serif;
+    }
+
+    /* MOBILE */
+    @media (max-width: 680px) {
+      #tentang {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .stats-row {
+        gap: 1.5rem;
+      }
+
+      .hero-decor,
+      .hero-decor-2 {
+        display: none;
+      }
+
+      .blog-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <div class="nav-logo">Kedhaton <span>Property</span></div>
+    <ul class="nav-links">
+      <li><a href="#hero">Beranda</a></li>
+      <li><a href="#tentang">Tentang</a></li>
+      <li><a href="#blog">Blog</a></li>
+      <li><a href="#berita">Berita</a></li>
+      <li><a href="#kontak">Kontak</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div id="hero">
+    <div class="hero-decor"></div>
+    <div class="hero-decor-2"></div>
+    <div class="hero-inner">
+      <div class="hero-tag">Marketing Property · Surabaya</div>
+      <h1>Menemukan Rumah <em>Impian</em> Anda Bersama Kami</h1>
+      <p class="hero-desc">
+        Kedhaton Property hadir dengan dedikasi penuh dalam membantu Anda menemukan hunian terbaik.
+        Kami memahami bahwa membeli rumah bukan sekadar transaksi — ini adalah keputusan hidup.
+      </p>
+      <div class="hero-cta">
+        <a href="#tentang" class="btn-primary">Kenali Kami</a>
+        <a href="#kontak" class="btn-outline">Hubungi Sekarang</a>
+      </div>
+      <div class="stats-row">
+        <div>
+          <div class="stat-num">120+</div>
+          <div class="stat-label">Rumah Terjual</div>
+        </div>
+        <div>
+          <div class="stat-num">5+</div>
+          <div class="stat-label">Tahun Pengalaman</div>
+        </div>
+        <div>
+          <div class="stat-num">98%</div>
+          <div class="stat-label">Klien Puas</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- TENTANG -->
+  <div id="tentang">
+    <div class="about-img-box">
+      <div class="about-img">
+        <div class="about-img-placeholder">🏠</div>
+      </div>
+      <div class="about-accent"></div>
+    </div>
+    <div class="about-text">
+      <div class="section-label">Tentang Kami</div>
+      <h2>Profesional di Bidang Properti Residensial</h2>
+      <p>
+        Kedhaton Property adalah tim marketing properti yang berfokus pada penjualan rumah di wilayah Surabaya dan
+        sekitarnya.
+        Kami percaya bahwa setiap keluarga berhak mendapatkan rumah yang nyaman dan sesuai kebutuhan.
+      </p>
+      <p>
+        Dengan pengalaman lebih dari 5 tahun, kami telah membantu ratusan keluarga menemukan rumah impian mereka.
+        Pendekatan kami yang personal dan jujur membuat proses pembelian menjadi lebih mudah dan menyenangkan.
+      </p>
+      <p>
+        Kami aktif berbagi informasi pasar properti, tips membeli rumah, dan update keseharian dunia properti melalui
+        blog ini.
+      </p>
+      <div class="tag-list">
+        <span class="tag">Penjualan Rumah</span>
+        <span class="tag">Konsultasi Properti</span>
+        <span class="tag">Nego & KPR</span>
+        <span class="tag">Jabodetabek & Surabaya</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- BLOG -->
+  <section id="blog">
+    <div class="blog-header">
+      <div>
+        <div class="section-label">Update Harian</div>
+        <h2>Catatan & Cerita Kami</h2>
+      </div>
+      <button class="btn-outline"
+        onclick="document.getElementById('new-post-form').style.display = document.getElementById('new-post-form').style.display === 'none' ? 'block' : 'none'">
+        + Tulis Post
+      </button>
+    </div>
+
+    <div class="blog-form" id="new-post-form" style="display:none;">
+      <h3>Tulis Update Baru</h3>
+      <div class="form-row">
+        <input type="text" id="post-title" placeholder="Judul postingan..." />
+        <select id="post-cat">
+          <option value="Keseharian">Keseharian</option>
+          <option value="Properti">Properti</option>
+          <option value="Tips">Tips</option>
+          <option value="Cerita Klien">Cerita Klien</option>
+        </select>
+      </div>
+      <textarea id="post-content" placeholder="Tulis cerita atau update kamu di sini..."></textarea>
+      <button class="btn-post" onclick="addPost()">Publikasikan</button>
+    </div>
+
+    <div class="posts-grid" id="posts-container"></div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- BERITA -->
+  <section id="berita">
+    <div class="section-label">Berita Properti</div>
+    <h2>Update Pasar Properti Indonesia</h2>
+
+    <div class="news-filter" id="news-filter">
+      <button class="filter-btn active" onclick="filterNews('semua', this)">Semua</button>
+      <button class="filter-btn" onclick="filterNews('harga', this)">Harga & Pasar</button>
+      <button class="filter-btn" onclick="filterNews('kpr', this)">KPR & Bunga</button>
+      <button class="filter-btn" onclick="filterNews('regulasi', this)">Regulasi</button>
+      <button class="filter-btn" onclick="filterNews('tips', this)">Tips Beli Rumah</button>
+    </div>
+
+    <div class="news-grid" id="news-grid">
+      <div class="news-loading">Memuat berita terkini...</div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- KONTAK -->
+  <section id="kontak">
+    <div class="kontak-inner">
+      <div class="kontak-text">
+        <div class="section-label" style="color: rgba(255,255,255,0.4);">Hubungi Kami</div>
+        <h2>Siap Bantu Kamu Temukan Rumah Impian</h2>
+        <p>Konsultasi gratis, tanpa tekanan. Kami senang mendengar kebutuhan Anda.</p>
+      </div>
+      <div class="kontak-links">
+        <a href="https://wa.me/6281234567890" class="kontak-link">
+          <div class="kontak-icon">📱</div>
+          WhatsApp: +62 812-3456-7890
+        </a>
+        <a href="mailto:hello@kedhatonproperty.com" class="kontak-link">
+          <div class="kontak-icon">✉️</div>
+          hello@kedhatonproperty.com
+        </a>
+        <a href="#" class="kontak-link">
+          <div class="kontak-icon">📍</div>
+          Surabaya, Jawa Timur
+        </a>
+        <a href="#" class="kontak-link">
+          <div class="kontak-icon">📸</div>
+          @kedhatonproperty
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2026 <span>Kedhaton Property</span> · Dibuat dengan dedikasi untuk hunian terbaik Anda
+  </footer>
+
+  <script>
+    // ============ BLOG ============
+    const defaultPosts = [
+      {
+        id: 1, title: "Survei Rumah Perdana Bareng Klien Baru",
+        cat: "Keseharian", date: "13 Maret 2026",
+        excerpt: "Hari ini kami menemani pasangan muda dari Surabaya Barat untuk survei perdana. Mereka mencari rumah 2 lantai dengan budget 800 jutaan. Momen seperti ini yang bikin semangat terus!"
+      },
+      {
+        id: 2, title: "5 Hal yang Wajib Dicek Sebelum Tanda Tangan PPJB",
+        cat: "Tips", date: "11 Maret 2026",
+        excerpt: "Banyak pembeli yang terburu-buru tanda tangan karena takut rumah diambil orang lain. Padahal ada 5 hal penting yang harus dicek dulu. Simak pengalaman kami selama 5 tahun di industri ini."
+      },
+      {
+        id: 3, title: "Closing Perdana Bulan Ini!",
+        cat: "Cerita Klien", date: "8 Maret 2026",
+        excerpt: "Alhamdulillah, hari ini resmi closing unit di Sidoarjo. Keluarga Pak Hendra akhirnya mendapatkan rumah impian mereka setelah 3 bulan pencarian. Terima kasih atas kepercayaannya!"
+      }
+    ];
+
+    let posts = JSON.parse(localStorage.getItem('kp_posts') || 'null') || defaultPosts;
+    let nextId = Math.max(...posts.map(p => p.id)) + 1;
+
+    function savePosts() {
+      localStorage.setItem('kp_posts', JSON.stringify(posts));
+    }
+
+    function renderPosts() {
+      const container = document.getElementById('posts-container');
+      if (posts.length === 0) {
+        container.innerHTML = '<p style="color:var(--warm-gray);font-size:14px;">Belum ada post. Tulis update pertamamu!</p>';
+        return;
+      }
+      container.innerHTML = posts.map(p => `
+    <div class="post-card">
+      <div class="post-meta">
+        <span class="post-cat">${p.cat}</span>
+        <span class="post-date">${p.date}</span>
+        <button class="post-delete" onclick="deletePost(${p.id})" title="Hapus">×</button>
+      </div>
+      <div class="post-title">${p.title}</div>
+      <div class="post-excerpt">${p.excerpt}</div>
+    </div>
+  `).join('');
+    }
+
+    function addPost() {
+      const title = document.getElementById('post-title').value.trim();
+      const content = document.getElementById('post-content').value.trim();
+      const cat = document.getElementById('post-cat').value;
+      if (!title || !content) { alert('Judul dan konten tidak boleh kosong!'); return; }
+
+      const now = new Date();
+      const date = now.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+
+      posts.unshift({ id: nextId++, title, cat, date, excerpt: content });
+      savePosts();
+      renderPosts();
+
+      document.getElementById('post-title').value = '';
+      document.getElementById('post-content').value = '';
+      document.getElementById('new-post-form').style.display = 'none';
+    }
+
+    function deletePost(id) {
+      if (!confirm('Hapus post ini?')) return;
+      posts = posts.filter(p => p.id !== id);
+      savePosts();
+      renderPosts();
+    }
+
+    // ============ BERITA ============
+    const newsData = [
+      { cat: 'harga', source: 'Kompas', title: 'Harga Rumah di Surabaya Naik 12% di Awal 2026', desc: 'Permintaan tinggi dari generasi milenial mendorong kenaikan harga properti residensial di kawasan Surabaya Barat dan Timur.', time: '2 jam lalu' },
+      { cat: 'kpr', source: 'Bisnis.com', title: 'BI Pertahankan Suku Bunga, KPR Tetap Kompetitif', desc: 'Bank Indonesia memutuskan mempertahankan suku bunga acuan, memberikan kepastian bagi calon pembeli rumah yang mengandalkan KPR.', time: '5 jam lalu' },
+      { cat: 'regulasi', source: 'CNBC Indonesia', title: 'Pemerintah Perpanjang Insentif PPN 0% untuk Rumah di Bawah 2 Miliar', desc: 'Kebijakan ini memberikan angin segar bagi masyarakat kelas menengah yang ingin membeli rumah pertama mereka tahun ini.', time: '8 jam lalu' },
+      { cat: 'tips', source: 'Rumah.com', title: '7 Tips Negosiasi Harga Rumah agar Dapat Harga Terbaik', desc: 'Negosiasi adalah seni. Ketahui kapan saat tepat untuk menawar dan bagaimana membangun argumen yang kuat ke penjual.', time: '1 hari lalu' },
+      { cat: 'harga', source: 'Detik Finance', title: 'Kawasan Sidoarjo Jadi Incaran Pembeli Rumah 2026', desc: 'Infrastruktur yang terus berkembang membuat Sidoarjo menjadi alternatif menarik bagi pembeli yang mencari hunian dekat Surabaya.', time: '1 hari lalu' },
+      { cat: 'kpr', source: 'OJK', title: 'OJK Dorong Perbankan Percepat Proses Pengajuan KPR Digital', desc: 'Regulator mendorong transformasi digital perbankan untuk mempercepat proses KPR, dari pengajuan hingga pencairan.', time: '2 hari lalu' },
+      { cat: 'tips', source: 'Kedhaton Property', title: 'Cara Cerdas Cek Legalitas Tanah Sebelum Beli Rumah', desc: 'Jangan sampai menyesal! Pastikan sertifikat, IMB, dan PBB sudah beres sebelum melakukan tanda tangan akad.', time: '2 hari lalu' },
+      { cat: 'regulasi', source: 'Kementerian PUPR', title: 'Program Sejuta Rumah 2026 Capai 420 Ribu Unit Awal Tahun', desc: 'Realisasi program sejuta rumah menunjukkan progres positif, dengan 65% unit menyasar segmen masyarakat berpenghasilan rendah.', time: '3 hari lalu' },
+      { cat: 'harga', source: 'PropertyGuru', title: 'Rumah Tapak Masih Jadi Pilihan Utama Keluarga Indonesia', desc: 'Survei terbaru menunjukkan 78% keluarga Indonesia lebih memilih rumah tapak dibanding apartemen sebagai hunian pertama.', time: '3 hari lalu' },
+    ];
+
+    let currentFilter = 'semua';
+
+    function filterNews(cat, btn) {
+      currentFilter = cat;
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderNews();
+    }
+
+    function renderNews() {
+      const grid = document.getElementById('news-grid');
+      const filtered = currentFilter === 'semua' ? newsData : newsData.filter(n => n.cat === currentFilter);
+      grid.innerHTML = filtered.map(n => `
+    <div class="news-card">
+      <div class="news-source"><span class="news-dot"></span>${n.source}</div>
+      <div class="news-title">${n.title}</div>
+      <div class="news-desc">${n.desc}</div>
+      <div class="news-time">${n.time}</div>
+    </div>
+  `).join('');
+    }
+
+    // Init
+    renderPosts();
+    setTimeout(() => renderNews(), 800);
+  </script>
+</body>
+
+</html>
