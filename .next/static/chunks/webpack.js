@@ -91,6 +91,21 @@
 /******/ 		};
 /******/ 	}();
 /******/ 	
+<<<<<<< Updated upstream
+=======
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	!function() {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = function(module) {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				function() { return module['default']; } :
+/******/ 				function() { return module; };
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
+/******/ 		};
+/******/ 	}();
+/******/ 	
+>>>>>>> Stashed changes
 /******/ 	/* webpack/runtime/create fake namespace object */
 /******/ 	!function() {
 /******/ 		var getProto = Object.getPrototypeOf ? function(obj) { return Object.getPrototypeOf(obj); } : function(obj) { return obj.__proto__; };
@@ -180,7 +195,11 @@
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	!function() {
+<<<<<<< Updated upstream
 /******/ 		__webpack_require__.h = function() { return "2d6b4a3fa0fc7a84"; }
+=======
+/******/ 		__webpack_require__.h = function() { return "10f337d115d9baa5"; }
+>>>>>>> Stashed changes
 /******/ 	}();
 /******/ 	
 /******/ 	/* webpack/runtime/global */

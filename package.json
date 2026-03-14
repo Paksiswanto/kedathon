@@ -1,0 +1,42 @@
+{
+  "name": "kedhaton-property",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "db:push": "prisma db push",
+    "db:studio": "prisma studio",
+    "db:seed": "node prisma/seed.js"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.16.0",
+    "@supabase/supabase-js": "^2.99.1",
+    "@tailwindcss/typography": "^0.5.13",
+    "bcryptjs": "^2.4.3",
+    "cloudinary": "^2.4.0",
+    "cookies-next": "^4.2.1",
+    "date-fns": "^3.6.0",
+    "jose": "^6.2.1",
+    "jsonwebtoken": "^9.0.2",
+    "next": "^14.2.35",
+    "next-cloudinary": "^6.13.0",
+    "prisma": "^5.16.0",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-quill": "^0.0.2"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/jsonwebtoken": "^9.0.6",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "autoprefixer": "^10.0.1",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
+  }
+}

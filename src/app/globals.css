@@ -1,0 +1,52 @@
+/* src/app/globals.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --cream: #FAF8F4;
+    --warm-white: #FFFDF9;
+    --charcoal: #1C1C1A;
+    --warm-gray: #6B6860;
+    --light-gray: #E8E5DF;
+    --gold: #B8924A;
+    --gold-light: #F5ECD9;
+    --border: #E0DDD6;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: var(--cream);
+    color: var(--charcoal);
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Playfair Display', serif;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-charcoal text-white px-7 py-3 rounded text-sm font-medium tracking-wide transition-colors hover:bg-gold;
+  }
+  .btn-outline {
+    @apply bg-transparent text-charcoal border border-[#E0DDD6] px-7 py-3 rounded text-sm transition-colors hover:border-gold hover:text-gold;
+  }
+  .btn-gold {
+    @apply bg-gold text-white px-6 py-2.5 rounded text-sm font-medium transition-colors hover:bg-gold-dark;
+  }
+  .input-base {
+    @apply w-full px-4 py-2.5 border border-[#E0DDD6] rounded text-sm outline-none focus:border-gold transition-colors bg-white font-sans;
+  }
+  .card {
+    @apply bg-white border border-[#E0DDD6] rounded-lg p-5 transition-colors hover:border-gold;
+  }
+  .tag-gold {
+    @apply bg-gold-light text-gold text-xs px-3 py-1 rounded font-medium;
+  }
+  .section-label {
+    @apply text-xs tracking-widest uppercase text-gold font-medium mb-2;
+  }
+}
