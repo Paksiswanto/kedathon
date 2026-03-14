@@ -1,10 +1,10 @@
-import { SignJWT, jwtVerify } from 'jose'
+import { SignJWT, jwtVerify, JWTPayload } from 'jose'
 import { cookies } from 'next/headers'
 
 export const COOKIE_NAME = 'kp_admin_token'
 const SECRET = new TextEncoder().encode(process.env.JWT_SECRET || 'fallback-secret')
 
-export interface AdminPayload {
+export interface AdminPayload extends JWTPayload {
   id: string
   username: string
   name: string
@@ -20,7 +20,7 @@ export async function signToken(payload: AdminPayload): Promise<string> {
 export async function verifyToken(token: string): Promise<AdminPayload | null> {
   try {
     const { payload } = await jwtVerify(token, SECRET)
-    return payload as unknown as AdminPayload
+    return payload as AdminPayload
   } catch {
     return null
   }
