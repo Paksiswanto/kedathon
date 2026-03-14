@@ -87,7 +87,10 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ success: true, berita }, { status: 201 })
   } catch (error) {
-    console.error('POST berita error:', error)
-    return NextResponse.json({ error: 'Gagal membuat berita' }, { status: 500 })
+     console.error('GET berita error:', error)
+  return NextResponse.json({ 
+    error: 'Gagal mengambil data berita',
+    detail: error instanceof Error ? error.message : String(error)
+  }, { status: 500 })
   }
 }

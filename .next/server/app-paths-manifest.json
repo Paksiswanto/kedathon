@@ -1,8 +1,5 @@
 {
   "/_not-found/page": "app/_not-found/page.js",
-  "/api/auth/login/route": "app/api/auth/login/route.js",
-  "/api/berita/route": "app/api/berita/route.js",
-  "/admin/login/page": "app/admin/login/page.js",
-  "/admin/berita/page": "app/admin/berita/page.js",
-  "/admin/berita/baru/page": "app/admin/berita/baru/page.js"
+  "/page": "app/page.js",
+  "/berita/[slug]/page": "app/berita/[slug]/page.js"
 }
