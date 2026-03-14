@@ -1,36 +1,28 @@
-// src/app/api/berita/route.ts
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { getAdminFromCookies } from '@/lib/auth'
 import { generateSlug } from '@/lib/utils'
 
-// GET - Public: ambil berita published, Admin: semua berita
 export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url)
-    const admin = getAdminFromCookies()
+    const admin = await getAdminFromCookies()
     const kategori = searchParams.get('kategori')
     const status = searchParams.get('status')
     const page = parseInt(searchParams.get('page') || '1')
     const limit = parseInt(searchParams.get('limit') || '10')
     const skip = (page - 1) * limit
 
-    // Cek scheduled yg sudah waktunya publish
     await prisma.berita.updateMany({
-      where: {
-        status: 'SCHEDULED',
-        scheduledAt: { lte: new Date() },
-      },
+      where: { status: 'SCHEDULED', scheduledAt: { lte: new Date() } },
       data: { status: 'PUBLISHED', publishedAt: new Date() },
     })
 
     const where: Record<string, unknown> = {}
 
     if (admin) {
-      // Admin bisa filter by status
       if (status) where.status = status
     } else {
-      // Public hanya lihat PUBLISHED
       where.status = 'PUBLISHED'
     }
 
@@ -43,17 +35,9 @@ export async function GET(req: NextRequest) {
         skip,
         take: limit,
         select: {
-          id: true,
-          judul: true,
-          slug: true,
-          ringkasan: true,
-          thumbnail: true,
-          kategori: true,
-          tags: true,
-          status: true,
-          publishedAt: true,
-          scheduledAt: true,
-          createdAt: true,
+          id: true, judul: true, slug: true, ringkasan: true,
+          thumbnail: true, kategori: true, tags: true, status: true,
+          publishedAt: true, scheduledAt: true, createdAt: true,
         },
       }),
       prisma.berita.count({ where }),
@@ -69,10 +53,9 @@ export async function GET(req: NextRequest) {
   }
 }
 
-// POST - Admin only: buat berita baru
 export async function POST(req: NextRequest) {
   try {
-    const admin = getAdminFromCookies()
+    const admin = await getAdminFromCookies()
     if (!admin) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
     const body = await req.json()
@@ -82,27 +65,26 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Judul, konten, dan kategori wajib diisi' }, { status: 400 })
     }
 
-    // Generate unique slug
     let slug = generateSlug(judul)
     const existing = await prisma.berita.findUnique({ where: { slug } })
     if (existing) slug = `${slug}-${Date.now()}`
 
-    const data: Record<string, unknown> = {
-      judul,
-      slug,
-      konten,
-      ringkasan: ringkasan || null,
-      thumbnail: thumbnail || null,
-      thumbnailId: thumbnailId || null,
-      kategori,
-      tags: Array.isArray(tags) ? tags : [],
-      status: status || 'DRAFT',
-    }
+    const berita = await prisma.berita.create({
+      data: {
+        judul,
+        slug,
+        konten,
+        ringkasan: ringkasan || null,
+        thumbnail: thumbnail || null,
+        thumbnailId: thumbnailId || null,
+        kategori,
+        tags: Array.isArray(tags) ? tags : [],
+        status: status || 'DRAFT',
+        publishedAt: status === 'PUBLISHED' ? new Date() : null,
+        scheduledAt: status === 'SCHEDULED' && scheduledAt ? new Date(scheduledAt) : null,
+      },
+    })
 
-    if (status === 'PUBLISHED') data.publishedAt = new Date()
-    if (status === 'SCHEDULED' && scheduledAt) data.scheduledAt = new Date(scheduledAt)
-
-    const berita = await prisma.berita.create({ data })
     return NextResponse.json({ success: true, berita }, { status: 201 })
   } catch (error) {
     console.error('POST berita error:', error)

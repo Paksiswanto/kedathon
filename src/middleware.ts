@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { jwtVerify } from 'jose'
+export const runtime = 'nodejs'
 
 const COOKIE_NAME = 'kp_admin_token'
 const SECRET = new TextEncoder().encode(process.env.JWT_SECRET || 'fallback-secret')

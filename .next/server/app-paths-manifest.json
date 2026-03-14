@@ -1,6 +1,3 @@
-<<<<<<< Updated upstream
-{}
-=======
 {
   "/_not-found/page": "app/_not-found/page.js",
   "/api/auth/login/route": "app/api/auth/login/route.js",
@@ -9,4 +6,3 @@
   "/admin/berita/page": "app/admin/berita/page.js",
   "/admin/berita/baru/page": "app/admin/berita/baru/page.js"
 }
->>>>>>> Stashed changes
