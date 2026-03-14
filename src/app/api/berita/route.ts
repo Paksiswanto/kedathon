@@ -5,6 +5,8 @@ import { generateSlug } from '@/lib/utils'
 
 export async function GET(req: NextRequest) {
   try {
+    const count = await prisma.berita.count()
+    
     const { searchParams } = new URL(req.url)
     const admin = await getAdminFromCookies()
     const kategori = searchParams.get('kategori')
@@ -46,10 +48,15 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({
       berita,
       pagination: { page, limit, total, totalPages: Math.ceil(total / limit) },
+      debug: { count, dbUrl: process.env.DATABASE_URL?.slice(0, 30) + '...' }
     })
   } catch (error) {
     console.error('GET berita error:', error)
-    return NextResponse.json({ error: 'Gagal mengambil data berita' }, { status: 500 })
+    return NextResponse.json({ 
+      error: 'Gagal mengambil data berita',
+      detail: error instanceof Error ? error.message : String(error),
+      dbUrl: process.env.DATABASE_URL?.slice(0, 30) + '...'
+    }, { status: 500 })
   }
 }
 
@@ -71,9 +78,7 @@ export async function POST(req: NextRequest) {
 
     const berita = await prisma.berita.create({
       data: {
-        judul,
-        slug,
-        konten,
+        judul, slug, konten,
         ringkasan: ringkasan || null,
         thumbnail: thumbnail || null,
         thumbnailId: thumbnailId || null,
@@ -87,9 +92,8 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ success: true, berita }, { status: 201 })
   } catch (error) {
-    console.error('GET berita error:', error)
     return NextResponse.json({
-      error: 'Gagal mengambil data berita',
+      error: 'Gagal membuat berita',
       detail: error instanceof Error ? error.message : String(error)
     }, { status: 500 })
   }
