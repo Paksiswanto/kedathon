@@ -1,6 +1,11 @@
-// src/app/admin/page.tsx
-import { redirect } from 'next/navigation'
+'use client'
+import { useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 
 export default function AdminPage() {
-  window.location.href = '/admin/berita'
-return null}
+  const router = useRouter()
+  useEffect(() => {
+    router.replace('/admin/berita')
+  }, [router])
+  return null
+}
