@@ -3,6 +3,7 @@
 import { useState, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import { KATEGORI_OPTIONS, TAG_SUGGESTIONS } from '@/lib/utils'
+import RichEditor from './RichEditor'
 
 interface BeritaFormProps {
   initialData?: {
@@ -146,10 +147,10 @@ export default function BeritaForm({ initialData, mode }: BeritaFormProps) {
       {/* Konten */}
       <div className="mb-5">
         <label className="block text-xs text-[#6B6860] mb-1.5 tracking-wide">Konten *</label>
-        <textarea name="konten" value={form.konten} onChange={handleChange}
-          className="input-base h-64 resize-y font-mono text-sm"
-          placeholder="Tulis konten berita... (mendukung HTML dasar: <p>, <h2>, <ul>, <ol>, <li>, <strong>, <em>)" required />
-        <p className="text-xs text-[#6B6860] mt-1">Tip: gunakan tag HTML seperti &lt;p&gt;, &lt;h2&gt;, &lt;ul&gt;, &lt;li&gt; untuk memformat konten.</p>
+        <RichEditor
+          value={form.konten}
+          onChange={(val) => setForm({ ...form, konten: val })}
+        />
       </div>
 
       {/* Row: Kategori + Status */}
@@ -192,7 +193,7 @@ export default function BeritaForm({ initialData, mode }: BeritaFormProps) {
         </div>
         <div className="flex gap-2">
           <input value={tagInput} onChange={(e) => setTagInput(e.target.value)}
-            onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); addTag(tagInput) }}}
+            onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); addTag(tagInput) } }}
             className="input-base flex-1" placeholder="Tambah tag lalu tekan Enter..." />
           <button type="button" onClick={() => addTag(tagInput)} className="btn-outline px-4 py-2">+</button>
         </div>
