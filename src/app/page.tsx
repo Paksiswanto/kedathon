@@ -3,6 +3,8 @@ import Link from 'next/link'
 import Navbar from '@/components/public/Navbar'
 import BeritaCard from '@/components/public/BeritaCard'
 import { prisma } from '@/lib/prisma'
+import Image from 'next/image'
+
 
 async function getLatestBerita() {
   try {
@@ -69,10 +71,16 @@ export default async function HomePage() {
       {/* TENTANG */}
       <section id="tentang" className="max-w-5xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-16 items-center">
         <div className="relative">
-          <div className="w-full aspect-[4/5] bg-[#E8E5DF] rounded flex items-center justify-center text-8xl text-[#E0DDD6]">
-            🏠
+
+          <div className="w-full aspect-[4/5] rounded overflow-hidden relative">
+            <Image
+              src="/images/hero.jpeg"
+              alt="Kedhaton Property"
+              fill
+              className="object-cover"
+              priority
+            />
           </div>
-          <div className="absolute -bottom-5 -right-5 w-36 h-36 bg-gold-light rounded -z-10" />
         </div>
         <div>
           <p className="section-label">Tentang Kami</p>
