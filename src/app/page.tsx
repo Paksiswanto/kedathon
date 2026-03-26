@@ -151,8 +151,8 @@ export default async function HomePage() {
           </div>
           <div className="flex flex-col gap-4">
             {[
-              { icon: '📱', label: 'WhatsApp', value: '+62 812-3456-7890', href: 'https://wa.me/6281234567890' },
-              { icon: '✉️', label: 'Email', value: 'hello@kedhatonproperty.com', href: 'mailto:hello@kedhatonproperty.com' },
+              { icon: '📱', label: 'WhatsApp', value: '+62 89-515-454-789', href: 'https://wa.me/6289515454789' },
+              { icon: '✉️', label: 'Email', value: 'kedhatonproperty@gmail.com', href: 'mailto:kedhatonproperty@gmail.com' },
               { icon: '📍', label: 'Lokasi', value: 'Surabaya, Jawa Timur', href: '#' },
               { icon: '📸', label: 'Instagram', value: '@kedhatonproperty', href: '#' },
             ].map((item) => (
